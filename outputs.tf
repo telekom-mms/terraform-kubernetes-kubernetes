@@ -1,91 +1,118 @@
 output "service" {
-  description = "kubernetes_service results"
+  description = "Outputs all attributes of service."
   value = {
-    for service in keys(kubernetes_service.service) :
-    service => {
-      metadata = kubernetes_service.service[service].metadata
-      status   = kubernetes_service.service[service].status
+    for k in keys(kubernetes_service.service) :
+    k => {
+      for key, value in kubernetes_service.service[k] :
+      key => value
     }
   }
 }
 
 output "service_account" {
-  description = "kubernetes_service_account results"
+  description = "Outputs all attributes of service_account."
   value = {
-    for service_account in keys(kubernetes_service_account.service_account) :
-    service_account => {
-      metadata = kubernetes_service_account.service_account[service_account].metadata
+    for k in keys(kubernetes_service_account.service_account) :
+    k => {
+      for key, value in kubernetes_service_account.service_account[k] :
+      key => value
     }
   }
 }
 
 output "role_binding" {
-  description = "kubernetes_role_binding results"
+  description = "Outputs all attributes of role_binding."
   value = {
-    for role_binding in keys(kubernetes_role_binding.role_binding) :
-    role_binding => {
-      metadata = kubernetes_role_binding.role_binding[role_binding].metadata
+    for k in keys(kubernetes_role_binding.role_binding) :
+    k => {
+      for key, value in kubernetes_role_binding.role_binding[k] :
+      key => value
     }
   }
 }
 
 output "cluster_role_binding" {
-  description = "kubernetes_cluster_role_binding results"
+  description = "Outputs all attributes of cluster_role_binding."
   value = {
-    for cluster_role_binding in keys(kubernetes_cluster_role_binding.cluster_role_binding) :
-    cluster_role_binding => {
-      metadata = kubernetes_cluster_role_binding.cluster_role_binding[cluster_role_binding].metadata
+    for k in keys(kubernetes_cluster_role_binding.cluster_role_binding) :
+    k => {
+      for key, value in kubernetes_cluster_role_binding.cluster_role_binding[k] :
+      key => value
     }
   }
 }
 
 output "namespace" {
-  description = "kubernetes_namespace results"
+  description = "Outputs all attributes of namespace."
   value = {
-    for namespace in keys(kubernetes_namespace.namespace) :
-    namespace => {
-      metadata = kubernetes_namespace.namespace[namespace].metadata
+    for k in keys(kubernetes_namespace.namespace) :
+    k => {
+      for key, value in kubernetes_namespace.namespace[k] :
+      key => value
     }
   }
 }
 
 output "secret" {
-  description = "kubernetes_secret results"
+  description = "Outputs all attributes of secret."
   value = {
-    for secret in keys(kubernetes_secret.secret) :
-    secret => {
-      metadata = kubernetes_secret.secret[secret].metadata
+    for k in keys(kubernetes_secret.secret) :
+    k => {
+      for key, value in kubernetes_secret.secret[k] :
+      key => value
     }
   }
+  sensitive = true
 }
 
 output "config_map" {
-  description = "kubernetes_config_map results"
+  description = "Outputs all attributes of config_map."
   value = {
-    for config_map in keys(kubernetes_config_map.config_map) :
-    config_map => {
-      metadata = kubernetes_config_map.config_map[config_map].metadata
-      data     = kubernetes_config_map.config_map[config_map].data
+    for k in keys(kubernetes_config_map.config_map) :
+    k => {
+      for key, value in kubernetes_config_map.config_map[k] :
+      key => value
     }
   }
 }
 
 output "storage_class" {
-  description = "kubernetes_storage_class results"
+  description = "Outputs all attributes of storage_class."
   value = {
-    for storage_class in keys(kubernetes_storage_class.storage_class) :
-    storage_class => {
-      metadata = kubernetes_storage_class.storage_class[storage_class].metadata
+    for k in keys(kubernetes_storage_class.storage_class) :
+    k => {
+      for key, value in kubernetes_storage_class.storage_class[k] :
+      key => value
     }
   }
 }
 
 output "persistent_volume_claim" {
-  description = "kubernetes_persistent_volume_claim results"
+  description = "Outputs all attributes of persistent_volume_claim."
   value = {
-    for persistent_volume_claim in keys(kubernetes_persistent_volume_claim.persistent_volume_claim) :
-    persistent_volume_claim => {
-      metadata = kubernetes_persistent_volume_claim.persistent_volume_claim[persistent_volume_claim].metadata
+    for k in keys(kubernetes_persistent_volume_claim.persistent_volume_claim) :
+    k => {
+      for key, value in kubernetes_persistent_volume_claim.persistent_volume_claim[k] :
+      key => value
     }
   }
+}
+
+output "variables" {
+  description = "Outputs all merged variables."
+  value = {
+    default = local.default
+    merged = {
+      service                 = local.service
+      service_account         = local.service_account
+      role_binding            = local.role_binding
+      cluster_role_binding    = local.cluster_role_binding
+      namespace               = local.namespace
+      secret                  = local.secret
+      config_map              = local.config_map
+      storage_class           = local.storage_class
+      persistent_volume_claim = local.persistent_volume_claim
+    }
+  }
+  sensitive = true
 }

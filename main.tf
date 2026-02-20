@@ -1,7 +1,9 @@
 /**
  * # kubernetes
  *
- * This module manages kubernetes.
+ * This module manages the kubernetes kubernetes resources, see https://registry.terraform.io/providers/hashicorp/kubernetes/latest/docs.
+ *
+ * For more information about the module structure see https://telekom-mms.github.io/terraform-template.
  *
 */
 
