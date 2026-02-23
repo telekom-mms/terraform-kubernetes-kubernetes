@@ -18,29 +18,29 @@ resource "kubernetes_service" "service" {
     labels        = local.service[each.key].metadata.labels
   }
   spec {
-    allocate_load_balancer_node_ports   = local.service[each.key].spec.allocate_load_balancer_node_ports
-    cluster_ip                          = local.service[each.key].spec.cluster_ip
-    cluster_ips                         = local.service[each.key].spec.cluster_ips
-    external_ips                        = local.service[each.key].spec.external_ips
-    external_name                       = local.service[each.key].spec.external_name
-    external_traffic_policy             = local.service[each.key].spec.external_traffic_policy
-    ip_families                         = local.service[each.key].spec.ip_families
-    ip_family_policy                   = local.service[each.key].spec.ip_family_policy
-    internal_traffic_policy             = local.service[each.key].spec.internal_traffic_policy
-    load_balancer_class                 = local.service[each.key].spec.load_balancer_class
-    load_balancer_ip                    = local.service[each.key].spec.load_balancer_ip
-    load_balancer_source_ranges         = local.service[each.key].spec.load_balancer_source_ranges
-    publish_not_ready_addresses         = local.service[each.key].spec.publish_not_ready_addresses
-    selector                            = local.service[each.key].spec.selector
-    type                               = local.service[each.key].spec.type
-    health_check_node_port              = local.service[each.key].spec.health_check_node_port
-    session_affinity                   = local.service[each.key].spec.session_affinity
+    allocate_load_balancer_node_ports = local.service[each.key].spec.allocate_load_balancer_node_ports
+    cluster_ip                        = local.service[each.key].spec.cluster_ip
+    cluster_ips                       = local.service[each.key].spec.cluster_ips
+    external_ips                      = local.service[each.key].spec.external_ips
+    external_name                     = local.service[each.key].spec.external_name
+    external_traffic_policy           = local.service[each.key].spec.external_traffic_policy
+    ip_families                       = local.service[each.key].spec.ip_families
+    ip_family_policy                  = local.service[each.key].spec.ip_family_policy
+    internal_traffic_policy           = local.service[each.key].spec.internal_traffic_policy
+    load_balancer_class               = local.service[each.key].spec.load_balancer_class
+    load_balancer_ip                  = local.service[each.key].spec.load_balancer_ip
+    load_balancer_source_ranges       = local.service[each.key].spec.load_balancer_source_ranges
+    publish_not_ready_addresses       = local.service[each.key].spec.publish_not_ready_addresses
+    selector                          = local.service[each.key].spec.selector
+    type                              = local.service[each.key].spec.type
+    health_check_node_port            = local.service[each.key].spec.health_check_node_port
+    session_affinity                  = local.service[each.key].spec.session_affinity
 
     dynamic "port" {
       for_each = local.service[each.key].spec.port
 
       content {
-        name = local.service[each.key].spec.port[port.key].name == "" ? port.key : local.service[each.key].spec.port[port.key].name
+        name         = local.service[each.key].spec.port[port.key].name == "" ? port.key : local.service[each.key].spec.port[port.key].name
         app_protocol = local.service[each.key].spec.port[port.key].app_protocol
         node_port    = local.service[each.key].spec.port[port.key].node_port
         port         = local.service[each.key].spec.port[port.key].port
@@ -79,10 +79,10 @@ resource "kubernetes_cluster_role_binding" "cluster_role_binding" {
   for_each = var.cluster_role_binding
 
   metadata {
-    name = local.cluster_role_binding[each.key].metadata.name == "" ? each.key : local.cluster_role_binding[each.key].metadata.name
-    annotations   = local.cluster_role_binding[each.key].metadata.annotations
+    name        = local.cluster_role_binding[each.key].metadata.name == "" ? each.key : local.cluster_role_binding[each.key].metadata.name
+    annotations = local.cluster_role_binding[each.key].metadata.annotations
     #generate_name = local.cluster_role_binding[each.key].metadata.generate_name
-    labels        = local.cluster_role_binding[each.key].metadata.labels
+    labels = local.cluster_role_binding[each.key].metadata.labels
   }
 
   role_ref {
@@ -107,11 +107,11 @@ resource "kubernetes_role_binding" "role_binding" {
   for_each = var.role_binding
 
   metadata {
-    name = local.role_binding[each.key].metadata.name == "" ? each.key : local.role_binding[each.key].metadata.name
-    namespace = local.role_binding[each.key].metadata.namespace
-    annotations   = local.role_binding[each.key].metadata.annotations
+    name        = local.role_binding[each.key].metadata.name == "" ? each.key : local.role_binding[each.key].metadata.name
+    namespace   = local.role_binding[each.key].metadata.namespace
+    annotations = local.role_binding[each.key].metadata.annotations
     #generate_name = local.role_binding[each.key].metadata.generate_name
-    labels        = local.role_binding[each.key].metadata.labels
+    labels = local.role_binding[each.key].metadata.labels
   }
 
   role_ref {
@@ -185,12 +185,12 @@ resource "kubernetes_storage_class" "storage_class" {
     labels        = local.storage_class[each.key].metadata.labels
   }
 
-  parameters = local.storage_class[each.key].parameters
-  storage_provisioner = local.storage_class[each.key].storage_provisioner
-  reclaim_policy = local.storage_class[each.key].reclaim_policy
-  volume_binding_mode  = local.storage_class[each.key].volume_binding_mode
-  allow_volume_expansion  = local.storage_class[each.key].allow_volume_expansion
-  mount_options = local.storage_class[each.key].mount_options
+  parameters             = local.storage_class[each.key].parameters
+  storage_provisioner    = local.storage_class[each.key].storage_provisioner
+  reclaim_policy         = local.storage_class[each.key].reclaim_policy
+  volume_binding_mode    = local.storage_class[each.key].volume_binding_mode
+  allow_volume_expansion = local.storage_class[each.key].allow_volume_expansion
+  mount_options          = local.storage_class[each.key].mount_options
 
   dynamic "allowed_topologies" {
     for_each = local.storage_class[each.key].allowed_topologies.match_label_expressions != {} ? [1] : []
@@ -213,19 +213,19 @@ resource "kubernetes_persistent_volume_claim" "persistent_volume_claim" {
 
   metadata {
     name          = local.persistent_volume_claim[each.key].metadata.name == "" ? each.key : local.persistent_volume_claim[each.key].metadata.name
-    namespace  = local.persistent_volume_claim[each.key].metadata.namespace
+    namespace     = local.persistent_volume_claim[each.key].metadata.namespace
     annotations   = local.persistent_volume_claim[each.key].metadata.annotations
     generate_name = local.persistent_volume_claim[each.key].metadata.generate_name
     labels        = local.persistent_volume_claim[each.key].metadata.labels
   }
 
   spec {
-    access_modes   = local.persistent_volume_claim[each.key].spec.access_modes
-    volume_name  = local.persistent_volume_claim[each.key].spec.volume_name
+    access_modes       = local.persistent_volume_claim[each.key].spec.access_modes
+    volume_name        = local.persistent_volume_claim[each.key].spec.volume_name
     storage_class_name = local.persistent_volume_claim[each.key].spec.storage_class_name
 
     resources {
-      limits = local.persistent_volume_claim[each.key].spec.resources.limits
+      limits   = local.persistent_volume_claim[each.key].spec.resources.limits
       requests = local.persistent_volume_claim[each.key].spec.resources.requests
     }
 
@@ -241,12 +241,12 @@ resource "kubernetes_persistent_volume_claim" "persistent_volume_claim" {
         match_labels = local.persistent_volume_claim[each.key].spec.selector.match_labels
 
         match_expressions {
-          key = local.persistent_volume_claim[each.key].spec.selector.match_expressions.key
+          key      = local.persistent_volume_claim[each.key].spec.selector.match_expressions.key
           operator = local.persistent_volume_claim[each.key].spec.selector.match_expressions.operator
-          values = local.persistent_volume_claim[each.key].spec.selector.match_expressions.values
+          values   = local.persistent_volume_claim[each.key].spec.selector.match_expressions.values
         }
       }
     }
   }
-  wait_until_bound =  local.persistent_volume_claim[each.key].wait_until_bound
+  wait_until_bound = local.persistent_volume_claim[each.key].wait_until_bound
 }
