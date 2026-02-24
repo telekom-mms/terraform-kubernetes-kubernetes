@@ -114,7 +114,7 @@ locals {
         labels        = null
       }
       role_ref = {
-        kind      = "ClusterRole"             // defined default
+        kind      = "ClusterRole"               // defined default
         api_group = "rbac.authorization.k8s.io" // defined default
       }
       subject = {
@@ -132,13 +132,13 @@ locals {
         labels        = null
       }
       role_ref = {
-        kind      = "ClusterRole"             // defined default
+        kind      = "ClusterRole"               // defined default
         api_group = "rbac.authorization.k8s.io" // defined default
       }
       subject = {
         name      = ""
         namespace = null
-        kind      = "ServiceAccount"          // defined default
+        kind      = "ServiceAccount"            // defined default
         api_group = "rbac.authorization.k8s.io" // defined default
       }
     }

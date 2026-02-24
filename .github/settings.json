@@ -4,8 +4,17 @@
     "visibility": "public",
     "default_branch": "main",
     "topics": [
-      "terraform",
-      "kubernetes"
+      "cluster-role-binding",
+      "config-map",
+      "kubernetes",
+      "namespace",
+      "persistent-volume-claim",
+      "role-binding",
+      "secret",
+      "service",
+      "service-account",
+      "storage-class",
+      "terraform"
     ]
   }
 }
