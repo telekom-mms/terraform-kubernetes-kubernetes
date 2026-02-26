@@ -145,21 +145,3 @@ output "variables" {
     }
   }
 }
-
-output "variables" {
-  description = "Outputs all merged variables."
-  value = {
-    default = local.default
-    merged = {
-      service                 = local.service
-      service_account         = local.service_account
-      role_binding            = local.role_binding
-      cluster_role_binding    = local.cluster_role_binding
-      namespace               = local.namespace
-      secret                  = local.secret
-      config_map              = local.config_map
-      storage_class           = local.storage_class
-      persistent_volume_claim = local.persistent_volume_claim
-    }
-  }
-}
