@@ -15,5 +15,5 @@ jobs:
     with:
       iac_type: terraform
       iac_dir: ./tests
-      policy_type: kubernetes
+      policy_type: k8s
       non_recursive: true
