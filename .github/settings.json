@@ -1,0 +1,20 @@
+{
+  "repos": {
+    "description": "A Terraform module that manages the kubernetes resources from the kubernetes provider.",
+    "visibility": "public",
+    "default_branch": "main",
+    "topics": [
+      "cluster-role-binding",
+      "config-map",
+      "kubernetes",
+      "namespace",
+      "persistent-volume-claim",
+      "role-binding",
+      "secret",
+      "service",
+      "service-account",
+      "storage-class",
+      "terraform"
+    ]
+  }
+}

@@ -1,52 +1,60 @@
 variable "service" {
   type        = any
   default     = {}
-  description = "resource definition, default settings are defined within locals and merged with var settings"
+  description = "Resource definition, default settings are defined within locals and merged with var settings. For more information look at [Outputs](#Outputs)."
 }
+
 variable "service_account" {
   type        = any
   default     = {}
-  description = "resource definition, default settings are defined within locals and merged with var settings"
+  description = "Resource definition, default settings are defined within locals and merged with var settings. For more information look at [Outputs](#Outputs)."
 }
+
 variable "role_binding" {
   type        = any
   default     = {}
-  description = "resource definition, default settings are defined within locals and merged with var settings"
+  description = "Resource definition, default settings are defined within locals and merged with var settings. For more information look at [Outputs](#Outputs)."
 }
+
 variable "cluster_role_binding" {
   type        = any
   default     = {}
-  description = "resource definition, default settings are defined within locals and merged with var settings"
+  description = "Resource definition, default settings are defined within locals and merged with var settings. For more information look at [Outputs](#Outputs)."
 }
+
 variable "namespace" {
   type        = any
   default     = {}
-  description = "resource definition, default settings are defined within locals and merged with var settings"
+  description = "Resource definition, default settings are defined within locals and merged with var settings. For more information look at [Outputs](#Outputs)."
 }
+
 variable "secret" {
   type        = any
   default     = {}
-  description = "resource definition, default settings are defined within locals and merged with var settings"
+  description = "Resource definition, default settings are defined within locals and merged with var settings. For more information look at [Outputs](#Outputs)."
 }
+
 variable "config_map" {
   type        = any
   default     = {}
-  description = "resource definition, default settings are defined within locals and merged with var settings"
+  description = "Resource definition, default settings are defined within locals and merged with var settings. For more information look at [Outputs](#Outputs)."
 }
+
 variable "storage_class" {
   type        = any
   default     = {}
-  description = "resource definition, default settings are defined within locals and merged with var settings"
+  description = "Resource definition, default settings are defined within locals and merged with var settings. For more information look at [Outputs](#Outputs)."
 }
+
 variable "persistent_volume_claim" {
   type        = any
   default     = {}
-  description = "resource definition, default settings are defined within locals and merged with var settings"
+  description = "Resource definition, default settings are defined within locals and merged with var settings. For more information look at [Outputs](#Outputs)."
 }
 
 locals {
   default = {
-    # resource definition
+    // resource definition
     service = {
       metadata = {
         name          = ""
@@ -56,29 +64,29 @@ locals {
         labels        = null
       }
       spec = {
-        allocate_load_balancer_node_ports= null
-        cluster_ip = null
-        cluster_ips = null
-        external_ips = null
-        external_name = null
-        external_traffic_policy = null
-        ip_families = null
-        ip_family_policy = null
-        internal_traffic_policy= null
-        load_balancer_class= null
-        load_balancer_ip = null
-        load_balancer_source_ranges= null
-        publish_not_ready_addresses = null
-        selector = null
-        type = null
-        health_check_node_port = null
-        session_affinity = "None"
+        allocate_load_balancer_node_ports = null
+        cluster_ip                        = null
+        cluster_ips                       = null
+        external_ips                      = null
+        external_name                     = null
+        external_traffic_policy           = null
+        ip_families                       = null
+        ip_family_policy                  = null
+        internal_traffic_policy           = null
+        load_balancer_class               = null
+        load_balancer_ip                  = null
+        load_balancer_source_ranges       = null
+        publish_not_ready_addresses       = null
+        selector                          = null
+        type                              = null
+        health_check_node_port            = null
+        session_affinity                  = null
         port = {
-          name = ""
-          app_protocol= null
-          node_port= null
-          protocol= "TCP"
-          target_port= null
+          name         = ""
+          app_protocol = null
+          node_port    = null
+          protocol     = "TCP" // defined default
+          target_port  = null
         }
         session_affinity_config = {
           client_ip = {
@@ -86,52 +94,52 @@ locals {
           }
         }
       }
-      wait_for_load_balancer = true
+      wait_for_load_balancer = null
     }
     service_account = {
       metadata = {
         name          = ""
-        namespace     = "kube-system"
+        namespace     = "kube-system" // defined default
         annotations   = null
         generate_name = null
         labels        = null
       }
-      automount_service_account_token = true
+      automount_service_account_token = null
     }
     cluster_role_binding = {
       metadata = {
-        name = ""
+        name          = ""
         annotations   = null
         generate_name = null
         labels        = null
       }
       role_ref = {
-        kind      = "ClusterRole"
-        api_group = "rbac.authorization.k8s.io"
+        kind      = "ClusterRole"               // defined default
+        api_group = "rbac.authorization.k8s.io" // defined default
       }
       subject = {
-        name = ""
+        name      = ""
         namespace = null
-        kind      = "ServiceAccount"
+        kind      = "ServiceAccount" // defined default
         api_group = null
       }
     }
     role_binding = {
       metadata = {
-        name = ""
+        name          = ""
         annotations   = null
         generate_name = null
         labels        = null
       }
       role_ref = {
-        kind      = "ClusterRole"
-        api_group = "rbac.authorization.k8s.io"
+        kind      = "ClusterRole"               // defined default
+        api_group = "rbac.authorization.k8s.io" // defined default
       }
       subject = {
-        name = ""
+        name      = ""
         namespace = null
-        kind      = "ServiceAccount"
-        api_group = "rbac.authorization.k8s.io"
+        kind      = "ServiceAccount"            // defined default
+        api_group = "rbac.authorization.k8s.io" // defined default
       }
     }
     namespace = {
@@ -173,11 +181,12 @@ locals {
         generate_name = null
         labels        = null
       }
-      parameters= null
-      reclaim_policy= null
-      volume_binding_mode = null
+      parameters             = null
+      storage_provisioner    = null
+      reclaim_policy         = null
+      volume_binding_mode    = null
       allow_volume_expansion = null
-      mount_options = null
+      mount_options          = null
       allowed_topologies = {
         match_label_expressions = {}
       }
@@ -191,17 +200,17 @@ locals {
         labels        = null
       }
       spec = {
-        volume_name  = null
-        storage_class_name  = null
+        volume_name        = null
+        storage_class_name = null
         resources = {
-          limits = null
+          limits   = null
           requests = null
         }
-        selector  = {
+        selector = {
           match_expressions = {
-            key = null
+            key      = null
             operator = null
-            values = null
+            values   = null
           }
           match_labels = null
         }
@@ -210,7 +219,7 @@ locals {
     }
   }
 
-  # compare and merge custom and default values
+  // compare and merge custom and default values
   service_values = {
     for service in keys(var.service) :
     service => merge(local.default.service, var.service[service])
@@ -248,7 +257,7 @@ locals {
     persistent_volume_claim => merge(local.default.persistent_volume_claim, var.persistent_volume_claim[persistent_volume_claim])
   }
 
-  # merge all custom and default values
+  // deep merge of all custom and default values
   service = {
     for service in keys(var.service) :
     service => merge(
@@ -389,4 +398,3 @@ locals {
     )
   }
 }
-
